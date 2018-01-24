@@ -13,6 +13,7 @@ class app extends React.Component {
         // make the addFish method visible to the app
         this.addFish = this.addFish.bind(this);
         this.loadSamples = this.loadSamples.bind(this);
+        this.addToOrder = this.addToOrder.bind(this);
         
         this.state = {
             fishes: {},
@@ -28,6 +29,15 @@ class app extends React.Component {
         fishes[`fishes-${timestamp}`] = fish;
         // update just the fishes part of the state for performance reasons
         this.setState({ fishes });
+    }
+    
+    addToOrder(key) {
+        // copy the existing order state
+        const order = {...this.state.order};
+        // either increment by one or add the first instance of this item
+        order[key] = order[key] + 1 || 1;
+        // update state
+        this.setState({ order });
     }
     
     loadSamples() {
@@ -51,7 +61,7 @@ class app extends React.Component {
                         {
                             Object
                             .keys(this.state.fishes)
-                            .map((key) => <Fish key={key} details={this.state.fishes[key]}/>)
+                            .map((key) => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)
                         }
                     </ul>
                 </div>

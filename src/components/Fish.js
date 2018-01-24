@@ -4,7 +4,7 @@ import { formatPrice } from "../helpers";
 class Fish extends React.Component {
     render() {
         // extract details from this.props with es6 destructuring (saves typing this.props a lot in the template)
-        const { details } = this.props;
+        const { details, index } = this.props;
         
         const isAvailable = details.status === "available";
         const btnTxt = isAvailable ? "Add To Order" : "Sold Out";
@@ -17,7 +17,7 @@ class Fish extends React.Component {
                     <span className="price">{formatPrice(details.price)}</span>
                 </h3>
                 <p>{details.desc}</p>
-                <button disabled={!isAvailable}>{btnTxt}</button>
+                <button disabled={!isAvailable} onClick={() => this.props.addToOrder(index)}>{btnTxt}</button>
             </li>
         )
     }
