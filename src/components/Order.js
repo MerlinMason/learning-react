@@ -6,6 +6,7 @@ class Order extends React.Component {
     constructor() {
         super();
         
+        // make 'this' available in the renderOrder method
         this.renderOrder = this.renderOrder.bind(this);
     }
     
@@ -26,6 +27,7 @@ class Order extends React.Component {
             </li>
         )
     }
+    
     render() {
         const orderIds = Object.keys(this.props.order);
         const total = orderIds.reduce((prevTotal, key) => {
